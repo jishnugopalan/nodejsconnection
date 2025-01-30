@@ -6,6 +6,7 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
+const userRoutes=require('./routes/user-routes');
 
 mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -19,6 +20,10 @@ mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopolo
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
+
+app.use('/api',userRoutes);
+
+
 
 app.get('/', (req, res) => {
     res.send("Hello World");
